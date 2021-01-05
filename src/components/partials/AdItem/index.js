@@ -15,7 +15,7 @@ export default ({data, disabled}) => {
         <ItemArea className="ad-item">
             <Link to={`/ad/item/${data.id}`}>
                 <div className="ad-image">
-                    <img src={data.images[0]} alt="Item image"/>
+                    <img src={data.images[0]} alt="Item"/>
                 </div>
                 <div className="ad-title">{data.title}</div>
                 <div className="ad-price">{price}</div>

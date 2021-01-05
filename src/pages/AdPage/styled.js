@@ -5,10 +5,8 @@ export const PageArea = styled.div`
     
     display: flex;
     padding: 20px 5px;
-    min-height: 90vh;
-
+    
     .box{
-
         background-color: #fff;
         border-radius: 5px;
         margin-bottom: 20px;
@@ -29,14 +27,14 @@ export const PageArea = styled.div`
         .ad-image{
             width: 320px;
             height: 320px;
-            .each-image{
-                img{
-                    width: 320px;
-                    height: 320px; 
-                    margin-right: 10px;
-                    background-size: cover;
-                }
+            
+            img{
+                width: 320px;
+                height: 320px; 
+                margin-right: 10px;
+                background-size: cover;
             }
+            
         }
 
         
@@ -148,28 +146,4 @@ export const BreadCrumb = styled.div`
         padding: 0 15px;
         margin-bottom: -10px;
     }
-`;
-
-export const RelatedAds = styled.div`
-
-    .related-list{
-
-        display: flex;
-        flex-wrap: wrap;
-
-        .ad-item{
-            width: 25%;
-        }
-    }
-
-    @media (max-width: 600px){
-        padding: 15px;
-        .related-list{
-            .ad-item {
-                width: 50%;
-            }
-        }
-    }
-
-
 `;

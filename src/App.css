@@ -12,15 +12,6 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-select{
-    height: 30px;
-    width: 220px;
-    font-size: 15px;
-}
-
 .v-height{
     min-height: 71vh;
 }

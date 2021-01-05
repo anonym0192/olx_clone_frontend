@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {FormArea} from './styled.js.js'
+import {FormArea} from './styled';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import useApi from '../../../helpers/OlxAPI';
 import {ErrorMsg} from '../../MainComponents';
 import {formatCurrencyToNumber, formatNumberToReal} from '../../../helpers/Utils';
 
-export default ({selectedAd}) => {
+export default ({selectedAd, setStatus}) => {
     const api = useApi();
 
     const [title, setTitle] = useState('');
@@ -15,23 +15,23 @@ export default ({selectedAd}) => {
     const [priceNegotiable, setPriceNegotiable] = useState(false);
     const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(false);
-    const [categoryList, setCategoryList] = useState([]);
     const [error, setError] = useState('');
+    const [categories, setCategories] = useState([]);
 
     const fileField = useRef();
 
     useEffect(()=>{
-        const getCategories = async () =>{
+        const getCategories = () =>{
             api.getCategories().then((categories)=>setCategories(categories));  
         };
         getCategories();
     }, []);
 
     useEffect(()=>{
-        setTitle(selectedAd.title);
-        setDescription(selectedAd.description);
-        setPrice(formatNumberToReal(selectedAd.price));
-        setPriceNegotiable(selectedAd.priceNegotiable);
+        setTitle(selectedAd.title || '');
+        setDescription(selectedAd.description || '');
+        setPrice(formatNumberToReal(selectedAd.price || ''));
+        setPriceNegotiable(selectedAd.priceNegotiable || '');
     }, [selectedAd]);
 
     const mask = createNumberMask({
@@ -48,7 +48,7 @@ export default ({selectedAd}) => {
         const fData = new FormData();
         fData.append('id', selectedAd.id);
         fData.append('title', title);
-        fData.append('price', price ? formatNumberToReal(price) : '');
+        fData.append('price', price ? formatCurrencyToNumber(price) : '');
         fData.append('priceNegotiable', priceNegotiable);
         fData.append('description', description);
         fData.append('category', category);

@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import {PageContainer, PageTitle} from '../../components/MainComponents';
-import AdItem from '../../components/partials/AdItem';
-import {PageArea, FakeLoad, BreadCrumb, OtherAds, RelatedAds} from './styled';
+import {PageContainer} from '../../components/MainComponents';
+import RelatedAds from '../../components/partials/RelatedAds';
+import {PageArea, FakeLoad, BreadCrumb} from './styled';
 import {useParams, Link} from 'react-router-dom';
 import useApi from '../../helpers/OlxAPI';
 import {Slide} from 'react-slideshow-image';
@@ -14,24 +14,25 @@ const AdPage = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [adInfo, setAdInfo] = useState({});
-
-
+    
     useEffect(() => {
 
+        window.scrollTo(0,0);
         const getAd = async (id) => {
 
             const ad = await api.getAd(id, true);
+
             setAdInfo(ad);
-            setLoading(false);            
+            setLoading(false);     
         }
         getAd(id);
-    } , []);
+    } , [id]);
 
     return (
         <PageContainer>
             { adInfo.category &&
                 <BreadCrumb>
-                    <Link exact to="/"> Home </Link>
+                    <Link to="/"> Home </Link>
                     / 
                     <Link to={`/ads?state=${adInfo.state}`}> {adInfo.state} </Link>
                     / 
@@ -39,24 +40,24 @@ const AdPage = () => {
                     / {adInfo.title}
                 </BreadCrumb>
             }
-
-
             <PageArea>
                 <div className="left-side">
                     <div className="box">
                          <div className="ad-image">
                              {loading && <FakeLoad height={'100%'}/> }
 
-                             {adInfo.images && adInfo.images?.length > 0 &&
+                             {adInfo.images && adInfo.images?.length > 1 &&
                                 <Slide>
                                     {adInfo.images.map((img, key) =>
                                         <div key={key} className="each-image">
-                                            <img src={img} alt={`Product image ${key}`}/>
+                                            <img src={img} alt={`Product ${key}`}/>
                                         </div>
                                     )}
                                 </Slide>
                             }
-                             
+                            {adInfo.images?.length <= 1 &&
+                                <img src={adInfo.images[0]} alt={`Product`}/>
+                            }
                          </div>
                          <div className="ad-info">
                             <div className="ad-name">
@@ -72,9 +73,7 @@ const AdPage = () => {
                                 {loading && <FakeLoad height={'20px'}/> }
                                 {adInfo?.description}
                                 <hr/>
-                                <small>Visualizações: {adInfo.views}</small>
-                                    
-                                
+                                <small>Visualizações: {adInfo.views}</small>                
                             </div>
                          </div>
                     </div>
@@ -84,10 +83,10 @@ const AdPage = () => {
                     <div className="box box-padding">
                         {loading && <FakeLoad height={'20px'}/> }
                         {adInfo.priceNegotiable &&
-                            <span>Preço Negociavel</span>
+                            <span><b>Preço Negociavel</b></span>
                         }
                         {!adInfo.priceNegotiable && adInfo.price !== undefined &&               
-                            <div className="price">Preço: <br/><span>{`R$ ${adInfo.price.toFixed(2)}`}</span> </div>                         
+                            <div className="price">Preço: <br/><span>{`R$ ${adInfo.price?.toFixed(2)}`}</span> </div>                         
                         }
                     </div>       
                     { adInfo.user && 
@@ -100,23 +99,11 @@ const AdPage = () => {
                             </div>
                         </>
                     }
-                </div>
-            
+                </div>    
             </PageArea>
-            <RelatedAds>
-                    {adInfo.others &&
-                    <>
-                        <h2>Outras ofertas do vendedor</h2>
-                        <div className="related-list">
-                        {
-                            adInfo.others.map((item, key) => 
-                                <AdItem key={key} data={item}/>
-                            )
-                        }
-                        </div>
-                    </>
-                    }
-                </RelatedAds>
+
+            <RelatedAds ads={adInfo.others || []}/>
+                    
         </PageContainer>
     );
 }

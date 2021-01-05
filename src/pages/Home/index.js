@@ -30,14 +30,13 @@ const Home = () => {
             setCategoryList(categories);
         };
         getCategoryList();
-
     }, []);
 
     useEffect(() => {
         const getAdList = async () =>  {
             const result = await api.getAds({
                 sort: 'desc',
-                limit: '16'
+                limit: '12'
             });
             if(result.ads){
                 setAdList(result.ads);
@@ -85,12 +84,10 @@ const Home = () => {
             <PageArea>
                 <h2>Recent Ads</h2>
                 <div className="ad-list">
-
                     {
                         adList.map( (ad , key) => 
                             <AdItem key={key} data={ad} />
                     )}
-
                 </div>
 
                 <Link to="/ads" className="see-all-link">View All >></Link>

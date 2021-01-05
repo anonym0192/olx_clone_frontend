@@ -155,7 +155,7 @@ const OlxAPI = {
         
         const params = {id, other};    
         const json = await apiFetchGet('/ad/item', params ,false);
-        console.log(json.data);
+        
         return (json.data) ? json.data : '';
     },
 

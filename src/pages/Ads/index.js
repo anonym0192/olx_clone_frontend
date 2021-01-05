@@ -16,7 +16,7 @@ const Ads = () => {
     const useQueryString = () => {
         return new URLSearchParams(useLocation().search);
     }
-
+    
     const query = useQueryString();
 
     const [q, setQ] = useState(query.get('q') !== null ? query.get('q') : '');
@@ -27,10 +27,8 @@ const Ads = () => {
     const [adList, setAdList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
-   
-
-    let limit = 5;  //Number of ads per page
+    
+    let limit = 6;  //Number of ads per page
     let offset = 0;
 
     const getAdList = async () =>  {
@@ -51,32 +49,28 @@ const Ads = () => {
         setAdList(ads);
         setLoading(false);
 
-        //Create de pagination
+        //Calculate how many pages the result will have   
         if(ads.length > 0){   
-            if(ads.length >= limit){   
+            if(ads.length >= limit) 
                 setPageCount(Math.ceil(result.total / ads.length));
-            }
         }else{
             setPageCount(0);
-        }
+        } 
     }
 
     useEffect( () => {
-        const getStatesList = async () => {
-            const states = await api.getStates();
-            setStateList(states);
-        };
-        getStatesList();
-    }, []);
-
-    useEffect(() => {
-
         const getCategoryList = async () => {
             const categories = await api.getCategories();
             setCategoryList(categories);
         };
+        const getStatesList = async () => {
+            const states = await api.getStates();
+            setStateList(states);
+        };
         getCategoryList();
+        getStatesList();
     }, []);
+
 
     //Create update the queryString when the state change 
     useEffect(() => {
@@ -101,7 +95,7 @@ const Ads = () => {
             clearTimeout(timer);
         }
         timer = setTimeout(function(){
-            setCurrentPage(0);
+            setPageCount(0);
             offset = 0;
             getAdList();
             
@@ -109,12 +103,12 @@ const Ads = () => {
 
     }, [q, state, cat]);
 
+
    const handlePageClick = (data) => {
         let selected = data.selected;
         offset = Math.ceil(selected * limit);
         getAdList();
       }; 
-
 
     return (
     <>
@@ -167,8 +161,8 @@ const Ads = () => {
                         {pageCount > 1 &&         
                             <div className="pagination-area">
                                 <ReactPaginate
-                                    previousLabel={'previous'}
-                                    nextLabel={'next'}
+                                    previousLabel={'Previous'}
+                                    nextLabel={'Next'}
                                     breakLabel={'...'}
                                     breakClassName={'break-me'}
                                     pageCount={pageCount}

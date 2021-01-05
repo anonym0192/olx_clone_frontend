@@ -5,7 +5,7 @@ import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { PageArea } from './styled';
 import useAPI from '../../helpers/OlxAPI';
-import {formatNumberToReal, formatCurrencyToNumber} from '../../helpers/Utils';
+import {formatCurrencyToNumber} from '../../helpers/Utils';
 
 function PostNewAd(){
 
@@ -57,6 +57,13 @@ function PostNewAd(){
         if(!category){
             erros.push("Categoria não selecionada");
         }
+        if(!price && !priceNegotiable){
+            erros.push("Preço não selecionado");
+        }
+        if(fileField.current.files.length === 0){
+            erros.push("Imagem não selecionada");
+        }
+
         if(erros.length === 0){
 
             let fData = new FormData();
@@ -67,20 +74,20 @@ function PostNewAd(){
             fData.append('category', category);
 
             if(fileField.current.files.length > 0){
-
                 for(let i = 0 ; i < fileField.current.files.length ; i++){
                     fData.append('img', fileField.current.files[i]);
                 }
-                const json = await api.postAd(fData); 
+            }  
+            
+            const json = await api.postAd(fData); 
 
-                if(json.error){
-                    setError(json.error);
-                }else{
-                    history.push(`/ad/item/${json.data.id}`);
+            if(json.error){
+                setError(json.error);
+            }else{
+                history.push(`/ad/item/${json.data.id}`);
                 }
-            }                 
         }else{
-            setError(erros.join('\r\n'));
+            setError(erros[0]);
         } 
         setDisabled(false);   
     }

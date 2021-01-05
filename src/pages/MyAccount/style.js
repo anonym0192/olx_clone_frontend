@@ -9,12 +9,16 @@ h2{
     font-size: 20px;
 }
 
-form{
+.form-area{
     background-color: #fff;
     padding: 25px;
     border-radius: 3px;
     box-shadow: 0px 0px 5px #999; 
 
+    form{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
     .area{
         max-width: 500px;
         margin-bottom: 10px;

@@ -36,7 +36,7 @@ export default () => {
             <RouterHandler path="/ads">
                 <Ads />
             </RouterHandler>
-            <RouterHandler path="/my-account">
+            <RouterHandler private exact path="/my-account">
                 <MyAccount />
             </RouterHandler>
             <RouterHandler>

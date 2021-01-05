@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const Template = styled.div`
@@ -25,7 +24,7 @@ export const ErrorMsg = styled.div`
     color: #000;
     border: solid #ff0000 2px;
     padding: 5px;
-    margin: 10px 0;
+    margin: 10px;
 `;
 
 export const SuccessMsg = styled.div`

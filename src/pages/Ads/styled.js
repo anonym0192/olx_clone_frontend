@@ -6,7 +6,6 @@ display: flex;
 margin-top: 10px;
 min-height: 100vh;
 
-
 .left-side{
     min-width: 25%;
     padding: 5px;
@@ -19,7 +18,6 @@ min-height: 100vh;
         border: 2px solid #9bb83c;
         border-radius: 5px;
     }
-
     .filter-name{
         margin-top: 10px;
     }
@@ -29,6 +27,7 @@ min-height: 100vh;
         padding: 0;
         margin: 0;
     }
+
     .category-item{
         display: flex;
         align-items: center;
@@ -78,6 +77,7 @@ min-height: 100vh;
     .ad-list{
         display: flex;
         flex-wrap: wrap;
+        min-height: 490px;
         .ad-item{
             width: 33%;
         }
@@ -96,17 +96,22 @@ min-height: 100vh;
                 height: 30px;
                 display: flex;
                 align-items: center;
-                padding: 10px;
                 border-radius: 5px;
+                cursor: pointer;
             }
             a{
-                
+                display: inline-block;
+                padding: 5px 10px;
+                border-radius: 5px;
+                flex: 1;    
             }
-
+            .previous,
+            .next,
+            .active{
+                background-color: #ff5707;
+                color: #fff;
+            }
         }
-
-
-
         .page-item{
             border: 1px solid #000;
             width: 25px;
@@ -119,12 +124,10 @@ min-height: 100vh;
 
             &:hover{
                 border: 1px solid #999;
-            }
-            
+            }    
         }
         .active{
             background-color: #ccc;
-
         }
     }
 }
@@ -157,7 +160,6 @@ min-height: 100vh;
 }
 
 `;
-
 
 export {PageArea};
 
