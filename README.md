@@ -10,6 +10,8 @@ A Olx like front-end clone, developed while learning React
 
 -Manage the authenticated user products
 
+-Product Images in a carousel
+
 -Visualize Products List
 
 -View each Product indiviadually
@@ -18,7 +20,7 @@ A Olx like front-end clone, developed while learning React
 
 -Filter products by State
 
--Filter products by Categories
+-Filter products by Category
 
 -Pagination
 
