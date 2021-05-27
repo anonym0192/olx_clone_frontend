@@ -1,5 +1,7 @@
 # Olx clone
-A Olx like front-end clone, developed while learning React
+An Olx like front-end clone, developed while learning React
+
+Backend API version :  https://github.com/anonym0192/olx_clone_backend
 
 ## Features
 -Create, Update, Delete a User
@@ -26,7 +28,8 @@ A Olx like front-end clone, developed while learning React
 
 
 ## Configuration
-You need to fill the variables.env file fields. Include your Mongodb database URL in the "DATABASE" field, and your SMTP server configuration in the "SMTP" fields. 
+
+This system needs the backend API to work properly. You need to fill your Backend Api Path in the .env file, inform the path in the following field "APP_API_BASEURL";
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
