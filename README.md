@@ -1,3 +1,32 @@
+# Olx clone
+A Olx like front-end clone, developed while learning React
+
+## Features
+-Create, Update, Delete a User
+
+-Register, Update, Delete a Product related to the User
+
+-Authentication 
+
+-Manage the authenticated user products
+
+-Visualize Products List
+
+-View each Product indiviadually
+
+-Filter products by Name
+
+-Filter products by State
+
+-Filter products by Categories
+
+-Pagination
+
+
+## Configuration
+You need to fill the variables.env file fields. Include your Mongodb database URL in the "DATABASE" field, and your SMTP server configuration in the "SMTP" fields. 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
